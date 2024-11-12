@@ -1,0 +1,98 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+bin/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+*.egg-info/
+lib/
+lib64/
+pip-wheel-metadata/
+*.dist-info/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv/
+.env/
+env.bak/
+venv.bak/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# VSCode and PyCharm settings
+.vscode/
+.idea/
+
+# macOS files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows files
+Thumbs.db
+Desktop.ini
+
+# PyInstaller files
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+*.cover
+coverage.xml
+*.coveragerc
+*.pytest_cache/
+
+# MyPy files
+.mypy_cache/
+
+# Profiling data
+.prof
+
+# Logs and debug
+*.log
+
+# IDEs, Editors and OS files
+*.swp
+*~
+*.swo
+*.bak
+*.tmp
+*.temp
+
+# Python environment
+env/
+env.bak/
+.venv/
+
+# Cache files
+*.cache
+.cache/
+__pycache__/
+
+# Custom files for Mila-IDE project
+reset.py  # If you want to ignore specific deployment files like reset scripts
