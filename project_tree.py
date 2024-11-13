@@ -2,7 +2,7 @@ import os
 import shutil
 from PyQt6.QtWidgets import QTreeWidget, QTreeWidgetItem, QMenu, QInputDialog, QMessageBox
 from PyQt6.QtCore import Qt, QMimeData
-from PyQt6.QtGui import QDrag
+from PyQt6.QtGui import QDrag, QBrush, QColor
 
 class ProjectTree(QTreeWidget):
     def __init__(self, logger=None, parent=None):
@@ -11,6 +11,7 @@ class ProjectTree(QTreeWidget):
         self.setHeaderHidden(True)
         self.setMinimumWidth(200)
         self.itemDoubleClicked.connect(self.open_file)
+        self.highlighted_item = None  # Track the currently highlighted item
 
         # Enable drag and drop
         self.setDragEnabled(True)
@@ -98,8 +99,6 @@ class ProjectTree(QTreeWidget):
             except Exception as e:
                 QMessageBox.critical(self, "Ошибка", f"Не удалось создать элемент: {e}")
 
-
-
     def delete_item(self):
         """Delete the selected file or folder."""
         item = self.currentItem()
@@ -162,14 +161,36 @@ class ProjectTree(QTreeWidget):
         event.acceptProposedAction()
 
     def dragMoveEvent(self, event):
-        """Handle drag move event."""
+        """Handle drag move event with item highlighting."""
+        target_item = self.itemAt(event.position().toPoint())
+        if target_item and target_item != self.highlighted_item:
+            # Remove highlight from the previous item
+            if self.highlighted_item:
+                self.highlighted_item.setBackground(0, QBrush(Qt.GlobalColor.transparent))
+
+            # Highlight the new target item
+            target_item.setBackground(0, QBrush(QColor(200, 200, 255)))  # Light blue highlight
+            self.highlighted_item = target_item
+
         event.acceptProposedAction()
+
+    def dragLeaveEvent(self, event):
+        """Remove highlighting when drag leaves the tree widget."""
+        if self.highlighted_item:
+            self.highlighted_item.setBackground(0, QBrush(Qt.GlobalColor.transparent))
+            self.highlighted_item = None
 
     def dropEvent(self, event):
         """Handle drop event."""
         source_path = event.mimeData().text()
         target_item = self.itemAt(event.position().toPoint())
+        
         if target_item:
+            # Remove highlight from the target item after dropping
+            if self.highlighted_item:
+                self.highlighted_item.setBackground(0, QBrush(Qt.GlobalColor.transparent))
+                self.highlighted_item = None
+
             target_path = target_item.data(0, Qt.ItemDataRole.UserRole)
             if os.path.isdir(target_path):
                 # Get the file/folder name
@@ -183,4 +204,5 @@ class ProjectTree(QTreeWidget):
                         self.logger.log(f"Перемещено {source_path} -> {new_path}")
                 except Exception as e:
                     QMessageBox.critical(self, "Ошибка перемещения", f"Не удалось переместить: {e}")
-            event.acceptProposedAction()
+
+        event.acceptProposedAction()
