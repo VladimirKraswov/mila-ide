@@ -2,21 +2,26 @@ import os
 import shutil
 from PyQt6.QtWidgets import QTreeWidget, QTreeWidgetItem, QMenu, QInputDialog, QMessageBox
 from PyQt6.QtCore import Qt, QMimeData
-from PyQt6.QtGui import QDrag, QBrush, QColor
+from PyQt6.QtGui import QDrag, QBrush, QColor, QIcon
+import qtawesome as qta
 
 class ProjectTree(QTreeWidget):
-    def __init__(self, logger=None, parent=None):
+    def __init__(self, parent=None):
         super().__init__(parent)
-        self.logger = logger  # Сохраняем ссылку на объект Logger
-        self.setHeaderHidden(True)
-        self.setMinimumWidth(200)
-        self.itemDoubleClicked.connect(self.open_file)
-        self.highlighted_item = None  # Track the currently highlighted item
-
-        # Enable drag and drop
-        self.setDragEnabled(True)
-        self.setAcceptDrops(True)
-        self.setDropIndicatorShown(True)
+        
+        # Настройка иконок для разных типов файлов с указанием цвета
+        self.file_icons = {
+            ".txt": qta.icon('fa5s.file-alt', color='white'),       # Белая иконка для текстовых файлов
+            ".py": QIcon("icons/python_icon.png"),            # Логотип Python для Python файлов
+            ".json": qta.icon('fa5s.file-code', color='green'),     # Зеленая иконка для JSON
+            ".gitignore": qta.icon('fa5s.cog', color='grey'),       # Серая иконка для .gitignore
+            "default": qta.icon('fa5s.file', color='black')         # Черная иконка по умолчанию для файлов
+        }
+        
+    def get_icon_for_file(self, file_name):
+        """Выбор иконки на основе расширения файла."""
+        extension = os.path.splitext(file_name)[1].lower()
+        return self.file_icons.get(extension, self.file_icons["default"])
     
     def load_directory(self, path):
         """Load the directory into the project tree."""
@@ -25,16 +30,21 @@ class ProjectTree(QTreeWidget):
         root.setData(0, Qt.ItemDataRole.UserRole, path)
         self.add_tree_items(root, path)
         root.setExpanded(True)
-
+    
     def add_tree_items(self, parent_item, path):
-        """Recursively add directories and files to the tree, with error handling for permissions."""
+        """Добавление элементов в дерево с соответствующими иконками."""
         try:
             for file_name in os.listdir(path):
                 full_path = os.path.join(path, file_name)
                 child_item = QTreeWidgetItem(parent_item, [file_name])
                 child_item.setData(0, Qt.ItemDataRole.UserRole, full_path)
+                
+                # Применяем иконку на основе типа файла или директории
                 if os.path.isdir(full_path):
+                    child_item.setIcon(0, qta.icon('fa5s.folder', color='gold'))  # Желтая иконка для папок
                     self.add_tree_items(child_item, full_path)
+                else:
+                    child_item.setIcon(0, self.get_icon_for_file(file_name))
         except PermissionError:
             print(f"Permission denied: {path}")
 
@@ -89,11 +99,13 @@ class ProjectTree(QTreeWidget):
                     os.makedirs(new_path, exist_ok=True)
                     new_item = QTreeWidgetItem(item, [name])
                     new_item.setData(0, Qt.ItemDataRole.UserRole, new_path)
+                    new_item.setIcon(0, qta.icon('fa5s.folder', color='gold'))  # Желтая иконка для папок
                 else:
                     with open(new_path, 'w') as f:
                         pass
                     new_item = QTreeWidgetItem(item, [name])
                     new_item.setData(0, Qt.ItemDataRole.UserRole, new_path)
+                    new_item.setIcon(0, self.get_icon_for_file(name))  # Иконка для файлов
 
                 item.setExpanded(True)  # Оставляем текущую папку открытой
             except Exception as e:
