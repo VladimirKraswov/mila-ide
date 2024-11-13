@@ -1,4 +1,3 @@
-# file_manager.py
 import os
 from PyQt6.QtWidgets import QFileDialog, QMessageBox
 

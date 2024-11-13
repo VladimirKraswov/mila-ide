@@ -1,4 +1,3 @@
-# project_tree.py
 import os
 from PyQt6.QtWidgets import QTreeWidget, QTreeWidgetItem
 from PyQt6.QtCore import Qt
@@ -6,7 +5,7 @@ from PyQt6.QtCore import Qt
 class ProjectTree(QTreeWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setHeaderHidden(True)  # Hide header
+        self.setHeaderHidden(True)
         self.setMinimumWidth(200)
         self.itemDoubleClicked.connect(self.open_file)
 

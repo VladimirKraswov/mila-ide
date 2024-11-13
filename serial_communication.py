@@ -1,5 +1,4 @@
 import serial
-import time
 
 class SerialCommunication:
     def __init__(self, port, baudrate=115200):

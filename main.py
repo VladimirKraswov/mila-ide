@@ -1,8 +1,6 @@
-# main.py
 import sys
-import os
 from PyQt6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QSplitter, QMessageBox, QToolBar
-from PyQt6.QtGui import QAction  # Импортируем QAction из QtGui
+from PyQt6.QtGui import QAction
 from PyQt6.QtCore import Qt
 from editor.editor import TabWidget, CodeEditor 
 from main_menu import MainMenu
@@ -12,7 +10,7 @@ from file_manager import FileManager
 from actions.editor_actions import EditorActions
 from actions.project_actions import ProjectActions
 from console_widget import ConsoleWidget
-from esp32_manager import ESP32Manager
+from esp_manager.esp32_manager import ESP32Manager
 
 class MainWindow(QMainWindow):
     def __init__(self):

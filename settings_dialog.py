@@ -1,4 +1,3 @@
-# settings_dialog.py
 from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLabel, QSpinBox, QPushButton, QHBoxLayout
 
 class SettingsDialog(QDialog):

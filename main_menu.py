@@ -1,7 +1,5 @@
-# main_menu.py
 from PyQt6.QtWidgets import QMenuBar, QMenu, QFileDialog
-from PyQt6.QtGui import QAction  # Изменили импорт на PyQt6.QtGui
-from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QAction
 
 class MainMenu(QMenuBar):
     def __init__(self, parent=None):
