@@ -1,5 +1,5 @@
-from PyQt6.QtWidgets import QMenuBar, QMenu, QFileDialog
-from PyQt6.QtGui import QAction
+from PySide6.QtWidgets import QMenuBar
+from PySide6.QtGui import QAction
 
 class MainMenu(QMenuBar):
     def __init__(self, parent=None):
@@ -32,34 +32,34 @@ class MainMenu(QMenuBar):
         edit_menu = self.addMenu("Редактировать")
 
         copy_action = QAction("Копировать", self)
-        # copy_action.triggered.connect(parent.editor_tabs.copy)
+        copy_action.triggered.connect(lambda: parent.editor_tabs.get_current_editor().copy())
         edit_menu.addAction(copy_action)
 
         paste_action = QAction("Вставить", self)
-        # paste_action.triggered.connect(parent.editor_tabs.paste)
+        paste_action.triggered.connect(lambda: parent.editor_tabs.get_current_editor().paste())
         edit_menu.addAction(paste_action)
 
         cut_action = QAction("Вырезать", self)
-        # cut_action.triggered.connect(parent.editor_tabs.cut)
+        cut_action.triggered.connect(lambda: parent.editor_tabs.get_current_editor().cut())
         edit_menu.addAction(cut_action)
 
         undo_action = QAction("Отменить", self)
-        # undo_action.triggered.connect(parent.editor_tabs.undo)
+        undo_action.triggered.connect(lambda: parent.editor_tabs.get_current_editor().undo())
         edit_menu.addAction(undo_action)
 
         redo_action = QAction("Вернуть", self)
-        # redo_action.triggered.connect(parent.editor_tabs.redo)
+        redo_action.triggered.connect(lambda: parent.editor_tabs.get_current_editor().redo())
         edit_menu.addAction(redo_action)
 
-        # Settings menu
-        settings_menu = self.addMenu("Settings")
-        editor_settings_action = QAction("Editor", self)
-        # editor_settings_action.triggered.connect(parent.open_editor_settings)
+        # Меню "Настройки"
+        settings_menu = self.addMenu("Настройки")
+        editor_settings_action = QAction("Настройки редактора", self)
+        editor_settings_action.triggered.connect(parent.open_editor_settings)
         settings_menu.addAction(editor_settings_action)
 
-        # Меню "О программа"
-        about_menu = self.addMenu("О программа")
+        # Меню "О программе"
+        about_menu = self.addMenu("О программе")
 
         about_action = QAction("О программе", self)
-        # about_action.triggered.connect(parent.show_about)
+        about_action.triggered.connect(parent.show_about)
         about_menu.addAction(about_action)

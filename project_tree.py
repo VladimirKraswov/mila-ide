@@ -1,8 +1,8 @@
 import os
 import shutil
-from PyQt6.QtWidgets import QTreeWidget, QTreeWidgetItem, QMenu, QInputDialog, QMessageBox
-from PyQt6.QtCore import Qt, QMimeData
-from PyQt6.QtGui import QDrag, QBrush, QColor, QIcon
+from PySide6.QtWidgets import QTreeWidget, QTreeWidgetItem, QMenu, QInputDialog, QMessageBox
+from PySide6.QtCore import Qt, QMimeData
+from PySide6.QtGui import QDrag, QBrush, QColor, QIcon
 import qtawesome as qta
 
 class ProjectTree(QTreeWidget):

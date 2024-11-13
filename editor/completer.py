@@ -1,6 +1,6 @@
 # editor/completer.py
-from PyQt6.QtWidgets import QListWidget, QListWidgetItem
-from PyQt6.QtCore import Qt, QPoint
+from PySide6.QtWidgets import QListWidget, QListWidgetItem
+from PySide6.QtCore import Qt, QPoint
 import jedi
 
 class CodeCompleter(QListWidget):

@@ -1,7 +1,7 @@
 # editor/editor.py
-from PyQt6.QtWidgets import QTextEdit, QTabWidget
-from PyQt6.QtGui import QFont, QPainter, QColor
-from PyQt6.QtCore import Qt
+from PySide6.QtWidgets import QTextEdit, QTabWidget
+from PySide6.QtGui import QFont, QPainter, QColor
+from PySide6.QtCore import Qt
 from .line_numbers import LineNumberArea
 from .highlighter import PygmentsHighlighter
 from .completer import CodeCompleter

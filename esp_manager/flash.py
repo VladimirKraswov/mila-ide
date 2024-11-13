@@ -1,6 +1,6 @@
 import esptool
 import os
-from PyQt6.QtWidgets import QMessageBox
+from PySide6.QtWidgets import QMessageBox
 
 class FlashManager:
     def __init__(self, logger, port, baudrate=115200):

@@ -1,11 +1,10 @@
-# actions/editor_actions.py
-from PyQt6.QtWidgets import QDialog
-from PyQt6.QtGui import QFont
+from PySide6.QtWidgets import QDialog
+from PySide6.QtGui import QFont
 from settings_dialog import SettingsDialog
 
 class EditorActions:
     def __init__(self, editor_tabs, settings_manager):
-        self.editor_tabs = editor_tabs  # TabWidget with multiple CodeEditor instances
+        self.editor_tabs = editor_tabs
         self.settings_manager = settings_manager
 
     def apply_editor_settings(self):

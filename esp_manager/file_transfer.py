@@ -1,6 +1,6 @@
 import subprocess
 import os
-from PyQt6.QtWidgets import QMessageBox
+from PySide6.QtWidgets import QMessageBox
 
 class FileTransfer:
     def __init__(self, logger, port):

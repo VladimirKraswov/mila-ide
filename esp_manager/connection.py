@@ -1,5 +1,5 @@
 import subprocess
-from PyQt6.QtWidgets import QMessageBox
+from PySide6.QtWidgets import QMessageBox
 
 class ESP32Connection:
     def __init__(self, logger, parent, port, baudrate=115200):

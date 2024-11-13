@@ -1,7 +1,7 @@
 import subprocess
 import time
 import os
-from PyQt6.QtWidgets import QMessageBox
+from PySide6.QtWidgets import QMessageBox
 
 class ESP32Reset:
     def __init__(self, logger, port):

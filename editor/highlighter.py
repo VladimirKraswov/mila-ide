@@ -1,5 +1,5 @@
 # editor/highlighter.py
-from PyQt6.QtGui import QSyntaxHighlighter, QTextCharFormat, QColor, QFont
+from PySide6.QtGui import QSyntaxHighlighter, QTextCharFormat, QColor, QFont
 from pygments.lexers import PythonLexer
 from pygments.styles import get_style_by_name
 

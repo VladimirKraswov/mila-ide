@@ -1,7 +1,7 @@
 # editor/line_numbers.py
-from PyQt6.QtWidgets import QWidget
-from PyQt6.QtGui import QPainter
-from PyQt6.QtCore import Qt
+from PySide6.QtWidgets import QWidget
+from PySide6.QtGui import QPainter
+from PySide6.QtCore import Qt
 
 class LineNumberArea(QWidget):
     def __init__(self, editor):

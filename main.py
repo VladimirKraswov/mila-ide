@@ -1,8 +1,9 @@
+# main.py
 import sys
-from PyQt6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QSplitter, QMessageBox, QToolBar
-from PyQt6.QtGui import QAction
-from PyQt6.QtCore import Qt
-from editor.editor import TabWidget, CodeEditor 
+from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QSplitter, QMessageBox, QToolBar
+from PySide6.QtGui import QAction
+from PySide6.QtCore import Qt
+from editor.editor import TabWidget, CodeEditor
 from main_menu import MainMenu
 from project_tree import ProjectTree
 from settings_manager import SettingsManager
@@ -21,10 +22,10 @@ class MainWindow(QMainWindow):
         # Initialize components
         self.settings_manager = SettingsManager()
         self.file_manager = FileManager(self)
-        self.editor_tabs = TabWidget() 
+        self.editor_tabs = TabWidget()
         self.project_tree = ProjectTree()
-        self.console_widget = ConsoleWidget()  # Initialize ConsoleWidget
-        self.esp32_manager = ESP32Manager(self, self.console_widget)  # Инициализация ESP32Manager
+        self.console_widget = ConsoleWidget()
+        self.esp32_manager = ESP32Manager(self, self.console_widget)
 
         # Initialize actions
         self.editor_actions = EditorActions(self.editor_tabs, self.settings_manager)
@@ -45,7 +46,7 @@ class MainWindow(QMainWindow):
         editor_splitter.setStretchFactor(1, 3)
 
         splitter.addWidget(editor_splitter)
-        splitter.addWidget(self.console_widget)  # Console widget below editor tabs
+        splitter.addWidget(self.console_widget)
         splitter.setStretchFactor(0, 3)
         splitter.setStretchFactor(1, 1)
 
@@ -65,7 +66,7 @@ class MainWindow(QMainWindow):
         connect_action.triggered.connect(self.connect_device)
         self.toolbar.addAction(connect_action)
 
-        upload_action = QAction("Загрузить файлы", self)  # Кнопка загрузки файлов
+        upload_action = QAction("Загрузить файлы", self)
         upload_action.triggered.connect(self.upload_files)
         self.toolbar.addAction(upload_action)
 

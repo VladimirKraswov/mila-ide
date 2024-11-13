@@ -1,8 +1,8 @@
 # console_tab.py
 import platform 
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QTextEdit
-from PyQt6.QtCore import QProcess, Qt, QEvent
-from PyQt6.QtGui import QColor, QTextCursor, QFont
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QTextEdit
+from PySide6.QtCore import QProcess, Qt, QEvent
+from PySide6.QtGui import QColor, QTextCursor, QFont
 
 class ConsoleTab(QWidget):
     def __init__(self, working_directory, parent=None):

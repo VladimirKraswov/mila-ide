@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QMessageBox, QInputDialog
+from PySide6.QtWidgets import QMessageBox, QInputDialog
 from serial.tools import list_ports
 
 def select_port(parent):
